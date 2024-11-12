@@ -1,0 +1,39 @@
+﻿@page
+
+
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Home page";
+    var viewWeather = ViewData["viewWeather"];
+
+
+}
+
+<div class="text-center">
+    <h1 class="display-3">Welcome to Rob's Weather Station</h1>
+    <div>
+        <p class="h4">
+            Enter your location here, then click submit to get the latest weather information for where you are.
+            <form method="post" asp-page-handler="GetWeather">
+                <p>Enter your location zipcode:</p>
+                <input asp-for="Weather.ZipCode" />
+                <button type="submit">Submit</button>
+            </form>
+        </p>
+
+
+        @if (Model.WeatherResponses != null && Model.WeatherResponses.temp > 10)
+        {
+            <p>The temp in @Model.Geo.name is: @((((Model.WeatherResponses.temp - 273.15) * 1.8) + 32).ToString("0.0")) F</p>
+            <p>@ViewData["Warning"]</p>
+
+        }
+
+
+
+
+
+
+    </div>
+</div>
